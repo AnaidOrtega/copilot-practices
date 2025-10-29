@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copilot Practices</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand fs-2" href="#">Welcome!</a>
+            <a class="navbar-brand fs-2" href="#">Copilot Practices</a>
+        </div>
+    </nav>
+    <header class="bg-primary text-white text-center py-5">
+        <h1>Welcome to Copilot Practices</h1>
+    </header>
+    <main class="container mt-5 min-vh-100">
+        <h2>About This Project</h2>
+        <p>
+            This project was used to explore and practice various features of GitHub
+            Copilot. Here, you can find examples of code snippets, best practices,
+            and tips for using Copilot effectively in your development workflow.
+        </p>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="data-tab" data-bs-toggle="tab" href="#data" role="tab"
+                    aria-controls="data" aria-selected="true">Data</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="chart-tab" data-bs-toggle="tab" href="#chart" role="tab" aria-controls="chart"
+                    aria-selected="false">Chart</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active pt-3" id="data" role="tabpanel" aria-labelledby="data-tab">
+                <!-- Responsive months grid: 2 cols mobile, 3 cols tablet, 4 cols desktop -->
+                <section aria-label="Months of the year" class="mt-4">
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+                        <!-- Month cell template: title + inputs in a flex column with 3px gap -->
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">January</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-january">Income</label>
+                                            <input id="income-january" type="number" class="form-control"
+                                                placeholder="0" aria-label="Income for January">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-january">Expenses</label>
+                                            <input id="expenses-january" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for January">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">February</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-february">Income</label>
+                                            <input id="income-february" type="number" class="form-control"
+                                                placeholder="0" aria-label="Income for February">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-february">Expenses</label>
+                                            <input id="expenses-february" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for February">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">March</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-march">Income</label>
+                                            <input id="income-march" type="number" class="form-control" placeholder="0"
+                                                aria-label="Income for March">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-march">Expenses</label>
+                                            <input id="expenses-march" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for March">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">April</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-april">Income</label>
+                                            <input id="income-april" type="number" class="form-control" placeholder="0"
+                                                aria-label="Income for April">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-april">Expenses</label>
+                                            <input id="expenses-april" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for April">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">May</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-may">Income</label>
+                                            <input id="income-may" type="number" class="form-control" placeholder="0"
+                                                aria-label="Income for May">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-may">Expenses</label>
+                                            <input id="expenses-may" type="number" class="form-control" placeholder="0"
+                                                aria-label="Expenses for May">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">June</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-june">Income</label>
+                                            <input id="income-june" type="number" class="form-control" placeholder="0"
+                                                aria-label="Income for June">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-june">Expenses</label>
+                                            <input id="expenses-june" type="number" class="form-control" placeholder="0"
+                                                aria-label="Expenses for June">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">July</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-july">Income</label>
+                                            <input id="income-july" type="number" class="form-control" placeholder="0"
+                                                aria-label="Income for July">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-july">Expenses</label>
+                                            <input id="expenses-july" type="number" class="form-control" placeholder="0"
+                                                aria-label="Expenses for July">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">August</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-august">Income</label>
+                                            <input id="income-august" type="number" class="form-control" placeholder="0"
+                                                aria-label="Income for August">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-august">Expenses</label>
+                                            <input id="expenses-august" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for August">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">September</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-september">Income</label>
+                                            <input id="income-september" type="number" class="form-control"
+                                                placeholder="0" aria-label="Income for September">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-september">Expenses</label>
+                                            <input id="expenses-september" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for September">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">October</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-october">Income</label>
+                                            <input id="income-october" type="number" class="form-control"
+                                                placeholder="0" aria-label="Income for October">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-october">Expenses</label>
+                                            <input id="expenses-october" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for October">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">November</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-november">Income</label>
+                                            <input id="income-november" type="number" class="form-control"
+                                                placeholder="0" aria-label="Income for November">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-november">Expenses</label>
+                                            <input id="expenses-november" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for November">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="p-3 border rounded">
+                                <div class="d-flex flex-column" style="gap:3px">
+                                    <div class="text-center fw-semibold">December</div>
+                                    <div class="d-flex flex-column" style="gap:3px">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="income-december">Income</label>
+                                            <input id="income-december" type="number" class="form-control"
+                                                placeholder="0" aria-label="Income for December">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="expenses-december">Expenses</label>
+                                            <input id="expenses-december" type="number" class="form-control"
+                                                placeholder="0" aria-label="Expenses for December">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="tab-pane fade pt-3" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+                <div>
+                    <canvas id="barChart" aria-label="Monthly income vs expenses bar chart"
+                        style="max-height:420px;"></canvas>
+                    <!-- Bootstrap button with the label Download -->
+                    <button class="btn btn-primary mt-3" id="downloadChartBtn">Download Chart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2023 Copilot Practices.</li> All rights reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

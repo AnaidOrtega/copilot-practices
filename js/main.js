@@ -80,6 +80,69 @@ function initChart() {
   }
 }
 
+// Username validation: not-empty on blur, length 4-20, letters only.
+function validateUsername() {
+  const input = document.getElementById('username')
+  const error = document.getElementById('usernameError')
+  if (!input) return false
+
+  const value = input.value.trim()
+
+  // Reset previous state
+  input.classList.remove('is-valid', 'is-invalid')
+  error.textContent = ''
+
+  if (value === '') {
+    input.classList.add('is-invalid')
+    error.textContent = 'Username is required.'
+    return false
+  }
+
+  if (value.length < 4 || value.length > 20) {
+    input.classList.add('is-invalid')
+    error.textContent = 'Username must be between 4 and 20 characters.'
+    return false
+  }
+
+  if (!/^[A-Za-z]+$/.test(value)) {
+    input.classList.add('is-invalid')
+    error.textContent =
+      'Username must contain letters only (no numbers or symbols).'
+    return false
+  }
+
+  // Valid
+  input.classList.add('is-valid')
+  return true
+}
+
+// Hook events after DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('username')
+  if (!input) return
+
+  // Validate when the input loses focus
+  input.addEventListener('blur', validateUsername)
+
+  // Clear validation while typing (friendly UX)
+  input.addEventListener('input', () => {
+    input.classList.remove('is-invalid', 'is-valid')
+    const err = document.getElementById('usernameError')
+    if (err) err.textContent = ''
+  })
+
+  // Optional: prevent form submission if invalid
+  const form = input.closest('form')
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      if (!validateUsername()) {
+        e.preventDefault()
+        input.focus()
+      }
+    })
+  }
+})
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('barChart')) initChart()
 })

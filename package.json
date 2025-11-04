@@ -1,0 +1,23 @@
+{
+  "name": "copilot-practices",
+  "version": "1.0.0",
+  "description": "Project generated with GitHub Copilot",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnaidOrtega/copilot-practices.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "bugs": {
+    "url": "https://github.com/AnaidOrtega/copilot-practices/issues"
+  },
+  "homepage": "https://github.com/AnaidOrtega/copilot-practices#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "http-server": "^14.1.1"
+  }
+}

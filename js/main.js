@@ -1,5 +1,4 @@
-// ...existing code...
-function initChart() {
+const initChart = () => {
   const months = [
     'january',
     'february',
@@ -14,16 +13,18 @@ function initChart() {
     'november',
     'december',
   ]
-  const labels = months.map((m) => m.charAt(0).toUpperCase() + m.slice(1))
+  const labels = months.map(month => month.at(0).toUpperCase() + month.slice(1))
 
-  const getValues = (prefix) =>
-    months.map((m) => {
-      const el = document.getElementById(`${prefix}-${m}`)
-      return el ? parseFloat(el.value) || 0 : 0
+  const getValues = prefix =>
+    months.map(month => {
+      const value = document.getElementById(`${prefix}-${month}`)?.value
+      return Number(value) || 0
     })
 
-  const ctx = document.getElementById('barChart').getContext('2d')
-  const chart = new Chart(ctx, {
+  const ctx = document.getElementById('barChart')?.getContext('2d')
+  if (!ctx) return
+  
+  const chartConfig = {
     type: 'bar',
     data: {
       labels,
@@ -48,66 +49,74 @@ function initChart() {
         y: { beginAtZero: true },
       },
     },
-  })
+  }
+  
+  const chart = new Chart(ctx, chartConfig)
 
   // update chart when inputs change
-  document.querySelectorAll('input[type="number"]').forEach((input) => {
+  document.querySelectorAll('input[type="number"]').forEach(input => {
     input.addEventListener('input', () => {
-      chart.data.datasets[0].data = getValues('income')
-      chart.data.datasets[1].data = getValues('expenses')
+      const [income, expenses] = ['income', 'expenses'].map(getValues)
+      Object.assign(chart.data.datasets[0], { data: income })
+      Object.assign(chart.data.datasets[1], { data: expenses })
       chart.update()
     })
   })
 
   // Download chart as PNG when button clicked
-  const downloadBtn = document.getElementById('downloadChartBtn')
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-      try {
-        const url = chart.toBase64Image()
-        const a = document.createElement('a')
-        a.href = url
-        a.download = 'copilot-practices-chart.png'
-        // Some browsers require the anchor to be in the document
-        document.body.appendChild(a)
-        a.click()
-        a.remove()
-      } catch (e) {
-        // fallback: open image in new tab
-        window.open(chart.toBase64Image(), '_blank')
-      }
-    })
+  const downloadChart = async () => {
+    try {
+      const url = chart.toBase64Image()
+      const link = document.createElement('a')
+      Object.assign(link, {
+        href: url,
+        download: 'copilot-practices-chart.png'
+      })
+      // Some browsers require the anchor to be in the document
+      document.body.append(link)
+      link.click()
+      link.remove()
+    } catch (error) {
+      // fallback: open image in new tab
+      window.open(chart.toBase64Image(), '_blank')
+    }
   }
+
+  document.getElementById('downloadChartBtn')?.addEventListener('click', downloadChart)
 }
 
 // Username validation: not-empty on blur, length 4-20, letters only.
-function validateUsername() {
+const validateUsername = () => {
   const input = document.getElementById('username')
   const error = document.getElementById('usernameError')
   if (!input) return false
 
   const value = input.value.trim()
+  const validationRules = [
+    {
+      test: value => value !== '',
+      message: 'Username is required.'
+    },
+    {
+      test: value => value.length >= 4 && value.length <= 20,
+      message: 'Username must be between 4 and 20 characters.'
+    },
+    {
+      test: value => /^[A-Za-z]+$/.test(value),
+      message: 'Username must contain letters only (no numbers or symbols).'
+    }
+  ]
 
   // Reset previous state
   input.classList.remove('is-valid', 'is-invalid')
   error.textContent = ''
 
-  if (value === '') {
+  // Find first validation failure if any
+  const failure = validationRules.find(rule => !rule.test(value))
+  
+  if (failure) {
     input.classList.add('is-invalid')
-    error.textContent = 'Username is required.'
-    return false
-  }
-
-  if (value.length < 4 || value.length > 20) {
-    input.classList.add('is-invalid')
-    error.textContent = 'Username must be between 4 and 20 characters.'
-    return false
-  }
-
-  if (!/^[A-Za-z]+$/.test(value)) {
-    input.classList.add('is-invalid')
-    error.textContent =
-      'Username must contain letters only (no numbers or symbols).'
+    error.textContent = failure.message
     return false
   }
 
@@ -117,33 +126,31 @@ function validateUsername() {
 }
 
 // Hook events after DOM loads
-document.addEventListener('DOMContentLoaded', () => {
+const initUserValidation = () => {
   const input = document.getElementById('username')
   if (!input) return
 
-  // Validate when the input loses focus
-  input.addEventListener('blur', validateUsername)
-
   // Clear validation while typing (friendly UX)
-  input.addEventListener('input', () => {
+  const clearValidation = () => {
     input.classList.remove('is-invalid', 'is-valid')
-    const err = document.getElementById('usernameError')
-    if (err) err.textContent = ''
-  })
-
-  // Optional: prevent form submission if invalid
-  const form = input.closest('form')
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      if (!validateUsername()) {
-        e.preventDefault()
-        input.focus()
-      }
-    })
+    document.getElementById('usernameError')?.textContent = ''
   }
-})
 
+  // Prevent form submission if invalid
+  const handleSubmit = event => {
+    if (!validateUsername()) {
+      event.preventDefault()
+      input.focus()
+    }
+  }
+
+  input.addEventListener('blur', validateUsername)
+  input.addEventListener('input', clearValidation)
+  input.closest('form')?.addEventListener('submit', handleSubmit)
+}
+
+// Initialize all components when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('barChart')) initChart()
+  initUserValidation()
+  document.getElementById('barChart') && initChart()
 })
-// ...existing code...

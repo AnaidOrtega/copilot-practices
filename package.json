@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "server": "node api/server.js"
   },
   "bugs": {
     "url": "https://github.com/AnaidOrtega/copilot-practices/issues"
@@ -19,5 +20,13 @@
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.10",
+    "resend": "^6.4.2"
   }
 }

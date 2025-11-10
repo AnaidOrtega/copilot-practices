@@ -74,7 +74,7 @@ function initChart() {
         a.remove()
       } catch (e) {
         // fallback: open image in new tab
-        window.open(chart.toBase64Image(), '_blank')
+        window.open(url, '_blank')
       }
     })
   }
@@ -115,6 +115,31 @@ function validateUsername() {
   input.classList.add('is-valid')
   return true
 }
+
+document.getElementById('sendEmailBtn').addEventListener('click', async () => {
+  // Send the email using a fetch request to your backend
+  try {
+    const email = document.getElementById('email').value
+    const canvas = document.getElementById('barChart')
+    const chartImage = canvas.toDataURL('image/png')
+
+    const response = await fetch('http://localhost:3001/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, chartImage }),
+    })
+
+    if (response.ok) {
+      alert('Email sent successfully!')
+    } else {
+      alert('Failed to send email.')
+    }
+  } catch (error) {
+    console.error('Error sending email:', error)
+  }
+})
 
 // Hook events after DOM loads
 document.addEventListener('DOMContentLoaded', () => {
